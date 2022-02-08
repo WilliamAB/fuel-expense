@@ -4,7 +4,9 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * DTO (Data Transfer Object) para veículo.
@@ -26,7 +28,8 @@ public class VeiculoDTO {
 	private String modelo;
 
 	@NotNull(message = "Data de fabricação deve ser informada!")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Schema(example = "01/01/2022", pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date dataFabricacao;
 
 	@NotNull(message = "Consumo médio na cidade deve ser informado!")

@@ -1,7 +1,8 @@
 package com.williamab.fuelexpense.service.impl;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,17 @@ public class FuelExpenseServiceImpl implements FuelExpenseService {
 			dto.setModelo(v.getModelo());
 			dto.setMarca(v.getMarca());
 
-			LocalDate localDate = v.getDataFabricacao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			dto.setAno(localDate.getYear());
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(v.getDataFabricacao());
+			dto.setAno(calendar.get(Calendar.YEAR));
 
 			Double quantidadeCombustivelGasto = getQuantidadeCombustivelGasto(totalKmCidade, totalKmRodovia, v);
-			dto.setQuantidadeCombustivelGasto(quantidadeCombustivelGasto);
 
-			dto.setValorTotalGastoCombustivel(quantidadeCombustivelGasto * precoGasolina);
+			dto.setQuantidadeCombustivelGasto(
+					new BigDecimal(quantidadeCombustivelGasto).setScale(2, RoundingMode.HALF_DOWN));
+
+			dto.setValorTotalGastoCombustivel(
+					new BigDecimal(quantidadeCombustivelGasto * precoGasolina).setScale(2, RoundingMode.HALF_DOWN));
 
 			return dto;
 		}).sorted((o1, o2) -> {

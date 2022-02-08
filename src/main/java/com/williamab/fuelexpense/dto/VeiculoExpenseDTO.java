@@ -1,5 +1,7 @@
 package com.williamab.fuelexpense.dto;
 
+import java.math.BigDecimal;
+
 /**
  * DTO (Data Transfer Object) para informações do veículo e gasto com
  * combustível.
@@ -13,8 +15,8 @@ public class VeiculoExpenseDTO {
 	private String marca;
 	private String modelo;
 	private Integer ano;
-	private Double quantidadeCombustivelGasto;
-	private Double valorTotalGastoCombustivel;
+	private BigDecimal quantidadeCombustivelGasto;
+	private BigDecimal valorTotalGastoCombustivel;
 
 	public String getNome() {
 		return nome;
@@ -48,19 +50,19 @@ public class VeiculoExpenseDTO {
 		this.ano = ano;
 	}
 
-	public Double getQuantidadeCombustivelGasto() {
+	public BigDecimal getQuantidadeCombustivelGasto() {
 		return quantidadeCombustivelGasto;
 	}
 
-	public void setQuantidadeCombustivelGasto(Double quantidadeCombustivelGasto) {
+	public void setQuantidadeCombustivelGasto(BigDecimal quantidadeCombustivelGasto) {
 		this.quantidadeCombustivelGasto = quantidadeCombustivelGasto;
 	}
 
-	public Double getValorTotalGastoCombustivel() {
+	public BigDecimal getValorTotalGastoCombustivel() {
 		return valorTotalGastoCombustivel;
 	}
 
-	public void setValorTotalGastoCombustivel(Double valorTotalGastoCombustivel) {
+	public void setValorTotalGastoCombustivel(BigDecimal valorTotalGastoCombustivel) {
 		this.valorTotalGastoCombustivel = valorTotalGastoCombustivel;
 	}
 
