@@ -21,8 +21,13 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+	testImplementation 'org.testng:testng:7.4.0'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+test {
+	useTestNG() {
+		suites 'src/test/resources/test-suite.xml'
+	}
 }
+
